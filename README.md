@@ -1,3 +1,4 @@
+![form-banner](https://github.com/Sports-day/sports-day-form/assets/58895178/efee1c5b-4b26-4f64-a59a-e40a36c5568d)
 # sports-day-form
 
 チーム申請といったアナログな作業をDXすることで、作業の最適化及びヒューマンエラーを最大限減らすことを目的とするアプリケーション
