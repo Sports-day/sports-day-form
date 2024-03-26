@@ -21,13 +21,10 @@ export async function POST(request: NextRequest) {
         }),
     })
 
-    //  convert response to json
-    // const data = await response.json()
-
+    //  get cookie from response
     const cookie = response.headers.get('set-cookie')
 
     if (cookie) {
-        console.log("cookie: ", cookie)
         // redirect to root page
         return new Response(null, {
             status: 301,
