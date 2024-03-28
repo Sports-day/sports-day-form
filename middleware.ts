@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
     if (!accessToken) {
         const protectedPaths = [
             '/form',
-            '/admin',
         ]
 
         //  check if next path starts with any of the protected paths or root
