@@ -40,7 +40,7 @@ const updateClass = async (id: number, omittedClass: Omit<Class, "id" | "created
 }
 
 const getClassUsers = async (id: number): Promise<User[]> => {
-    const {data} = await fetchWithToken(`/classes/${id}/users`, {
+    const data = await fetchWithToken(`/classes/${id}/users`, {
         method: "GET",
     })
     return data.data
