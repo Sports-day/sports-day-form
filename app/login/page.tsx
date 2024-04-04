@@ -1,5 +1,5 @@
 'use client'
-import {Icon, Stack, Typography} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import LoginButton from "@/components/auth/LoginButton";
 import {PolicyButton} from "@/components/PolicyButton";
 import {createPalette} from "@/components/palette";
