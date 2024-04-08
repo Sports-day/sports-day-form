@@ -68,7 +68,11 @@ export const colorTheme = createTheme({
         "s-darkest": {
             main: '#2F3C8C',
             contrastText: '#FFFFFF',
+
         },
+        background: {
+            default: '#EFF0F8',
+        }
     },
 });
 
