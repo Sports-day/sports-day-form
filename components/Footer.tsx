@@ -1,19 +1,16 @@
 'use client'
 import {Button, Stack, Typography, Paper, BottomNavigation} from "@mui/material";
-import {createPalette} from "@/components/palette";
 
 const Footer = () => {
     return (
-        <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
-            <BottomNavigation color='primary'
-                              sx={{
-                                  height: '64px',
-                                  color: createPalette.palette.lighter.main,
-                                  backgroundColor: createPalette.palette.primary.dark
-                              }}
+        <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, }}>
+            <BottomNavigation sx={{
+                color: 's-lightest.main',
+                background: `radial-gradient(ellipse at left, #5F6DC2, #4A5ABB)`,
+                height: '64px'
+            }}
             >
-
-                <Stack direction='row' spacing={2.5}
+                <Stack direction='row' spacing={3}
                        sx={{
                            justifyContent: 'center',
                            alignItems: 'center',
@@ -25,18 +22,18 @@ const Footer = () => {
                     <Button
                         variant='contained'
                         sx={{
-                            flex: '0.1',
-                            background: createPalette.palette.primary.main,
-                            color: createPalette.palette.lighter.main
+                            flex: '0.15',
+                            color: 's-lightest.main',
+                            backgroundColor: 's-lighter.main'
                         }}>
                         戻る
                     </Button>
                     <Button
                         variant='contained'
                         sx={{
-                            flex: '0.1',
-                            color: createPalette.palette.primary.dark,
-                            background: createPalette.palette.lighter.main
+                            flex: '0.15',
+                            backgroundColor: 's-light.main',
+                            color: 's-dark.main'
                         }}>
                         確認画面に進む
                     </Button>

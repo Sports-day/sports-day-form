@@ -3,7 +3,6 @@ import {Button} from "@mui/material";
 import crypto from 'crypto';
 import * as querystring from "querystring";
 import {useEffect, useState} from "react";
-import {createPalette} from "@/components/palette";
 
 export default function LoginButton() {
     const [authorizationUrl, setAuthorizationUrl] = useState<string>('')
@@ -38,11 +37,11 @@ export default function LoginButton() {
     return (
         <Button
             variant="contained"
-            color="primary"
             href={authorizationUrl}
             sx={{
-                color: createPalette.palette.primary.dark,
-                background: createPalette.palette.lighter.main
+                color: 's-dark.main',
+                backgroundColor: 's-light.main',
+                borderRadius: "9px"
             }}
         >
             {buttonDisplayName}

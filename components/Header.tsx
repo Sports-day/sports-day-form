@@ -2,16 +2,15 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import {createPalette} from "@/components/palette";
 
 const Header = () => {
     return (
         <AppBar position="static"
                 sx={{
-                    backgroundColor: createPalette.palette.primary.dark,
-
-
-                }}>
+                    color: 's-lightest.main',
+                    background: `radial-gradient(ellipse at left, #5F6DC2, #4A5ABB)`
+                }}
+                >
             <Toolbar>
                 <Typography variant="h6" component="div">
                     SPORTSDAY
