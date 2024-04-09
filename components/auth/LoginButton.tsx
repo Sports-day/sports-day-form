@@ -41,7 +41,8 @@ export default function LoginButton() {
             sx={{
                 color: 's-dark.main',
                 backgroundColor: 's-light.main',
-                borderRadius: "9px"
+                borderRadius: "9px",
+                py: 1.5
             }}
         >
             {buttonDisplayName}

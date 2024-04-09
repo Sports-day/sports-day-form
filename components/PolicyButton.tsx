@@ -8,7 +8,8 @@ export function PolicyButton() {
             sx={{
                 color: "s-lightest.main",
                 backgroundColor: 's-lighter.main',
-                borderRadius: "9px"
+                borderRadius: "9px",
+                py: 1.5
             }}
             >
             プライバシーポリシー
