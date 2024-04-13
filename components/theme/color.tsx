@@ -43,7 +43,7 @@ declare module '@mui/material/AppBar' {
     }
 }
 
-export const colorTheme = createTheme({
+export const theme = createTheme({
     palette: {
         "s-lightest": {
             main: '#FFFFFF'
