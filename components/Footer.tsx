@@ -4,10 +4,11 @@ import {Button, Stack, Typography, Paper, BottomNavigation} from "@mui/material"
 const Footer = () => {
     return (
         <Paper sx={{position: 'fixed', bottom: 0, left: 0, right: 0, }}>
-            <BottomNavigation sx={{
+            <BottomNavigation
+                sx={{
                 color: 's-lightest.main',
                 background: `radial-gradient(ellipse at left, #5F6DC2, #4A5ABB)`,
-                height: '64px'
+                height: '70px'
             }}
             >
                 <Stack direction='row' spacing={3}
@@ -21,18 +22,24 @@ const Footer = () => {
                     </Typography>
                     <Button
                         variant='contained'
+                        disableElevation={true}
                         sx={{
-                            flex: '0.15',
+                            flex: '0.18',
+                            py: 1.0,
                             color: 's-lightest.main',
-                            backgroundColor: 's-lighter.main'
+                            backgroundColor: 's-lighter.main',
+                            borderRadius: "10px",
                         }}>
                         戻る
                     </Button>
                     <Button
                         variant='contained'
+                        disableElevation={true}
                         sx={{
-                            flex: '0.15',
+                            flex: '0.18',
+                            py: 1.0,
                             backgroundColor: 's-light.main',
+                            borderRadius: "10px",
                             color: 's-dark.main'
                         }}>
                         確認画面に進む
