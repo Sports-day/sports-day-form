@@ -18,8 +18,11 @@ export default function AddTeam(props: AddTeamProps) {
         const userInfo = await userinfoFactory().fetch()
         const classInfo = await classFactory().show(userInfo.classId)
 
+        //generate 2 random characters
+
+
         await teamFactory().create({
-            name: `${classInfo.name}`,
+            name: `${classInfo.name}-${generateRandomString(2)}`,
             description: "",
             classId: classInfo.id,
             teamTagId: props.tag.id
@@ -41,4 +44,14 @@ export default function AddTeam(props: AddTeamProps) {
             チームを追加
         </Button>
     )
+}
+
+function generateRandomString(length: number): string {
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * alphabet.length);
+        result += alphabet[randomIndex];
+    }
+    return result;
 }
