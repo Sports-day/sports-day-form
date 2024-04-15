@@ -8,8 +8,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import { classFactory } from "@/src/models/ClassModel";
 
-//メニューに関する表示の設定
+export type TeamMemberProps = {
+    classId: number
+}
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -22,82 +26,61 @@ const MenuProps = {
     },
 };
 
-//追加する項目の設定
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
-
-//指定されている名前のフォントサイズを変更
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(member: string, personName: readonly string[], theme: Theme) {
     return {
         fontWeight:
-            personName.indexOf(name) === -1
+            personName.indexOf(member) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
     };
 }
 
-
-export default function MultipleSelectChip() {
+export default function MultipleSelectChip(props: TeamMemberProps) {
     const theme = useTheme();
     const [personName, setPersonName] = React.useState<string[]>([]);
+    const [members, setMembers] = React.useState<string[]>([]);
+
+    React.useEffect(() => {
+        const fetchMembers = async () => {
+            const memberData = await classFactory().getUsers(props.classId);
+            setMembers(memberData.map(user => user.name));
+        };
+        fetchMembers();
+    }, [props.classId]);
 
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
             target: { value },
         } = event;
         setPersonName(
-            // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
     };
 
     return (
         <div>
-            <FormControl  sx={{marginTop: 1, marginBottom: 1, width: 338}}>
-                <InputLabel shrink　id="demo-multiple-chip-label" sx={{ color: 's-dark.main' }} >メンバーを登録してください</InputLabel>
+            <FormControl sx={{ marginTop: 1, marginBottom: 1, width: 338 }}>
+                <InputLabel shrink id="demo-multiple-chip-label" sx={{ color: 's-dark.main' }}>メンバーを登録してください</InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
-                    sx={{'& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 's-darkest.main',
-                            paddingRight: '0px'
-                        }}}
                     id="demo-multiple-chip"
                     multiple
                     displayEmpty
-                    label="メンバーを登録してください"
                     value={personName}
                     onChange={handleChange}
-                    input={<OutlinedInput
-                        id="select-multiple-chip"
-                        label="メンバーを登録してください"
-                        style={{ borderColor: 'red' }} // ふちの色を変更
-                    />}
+                    input={<OutlinedInput id="select-multiple-chip" label="メンバーを登録してください" />}
                     renderValue={(selected) => (
-                        <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 1.0}}>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.0 }}>
                             {selected.map((value) => (
-                                <Chip key={value} label={value}/>
+                                <Chip key={value} label={value} />
                             ))}
                         </Box>
                     )}
                     MenuProps={MenuProps}
                 >
-                    {names.map((name) => (
-                        <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
-                        >
-                            {name}
+                    {members.map((memberName) => (
+                        <MenuItem key={memberName} value={memberName} style={getStyles(memberName, personName, theme)}>
+                            {memberName}
                         </MenuItem>
                     ))}
                 </Select>
