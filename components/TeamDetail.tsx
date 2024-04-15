@@ -3,17 +3,18 @@ import TeamChip from "@/components/TeamChip"
 import AthleteChip from "@/components/AthleteChip"
 import React from "react";
 import {Team} from "@/src/models/TeamModel";
+import DeleteTeam from "@/components/DeleteTeam";
 
 export type TeamDetailProps = {
     team: Team
 }
 
-export default function TeamDetail(props:TeamDetailProps) {
+export default function TeamDetail(props: TeamDetailProps) {
     return (
         <Card variant="outlined"
               sx={{
                   display: 'flex',
-                  borderRadius: '20px',
+                  borderRadius: '9px',
                   alignItems: 'flex-start',
                   padding: 1,
                   margin: '0 auto',
@@ -30,38 +31,12 @@ export default function TeamDetail(props:TeamDetailProps) {
                             {props.team.name}の情報を登録
                         </Typography>
                     </Stack>
-                    <Stack >
-                        <TeamChip/>
-                        <AthleteChip/>
-                    </Stack>
-
-                    <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="space-around">
-                        <Button
-                            variant="outlined"
-                            size="small"
-                            fullWidth
-                            color="warning"
-                            style={{ border: '1px solid' }}
-                            sx={{
-                                borderRadius: "9px",
-                                py: 0.3
-                            }}
-                        >
-                            このチームを消す
-                        </Button>
-                        <Button
-                            size="medium"
-                            variant="contained"
-                            fullWidth
-                            sx={{
-                                color: "s-lightest.main",
-                                backgroundColor: 's-lighter.main',
-                                borderRadius: "9px",
-                                py: 0.3
-                            }}
-                        >
-                            この情報で保存
-                        </Button>
+                    <Stack spacing={3}>
+                        <Stack spacing={1}>
+                            <TeamChip classId={props.team.classId}/>
+                            <AthleteChip/>
+                        </Stack>
+                        <DeleteTeam teamId={props.team.id}/>
                     </Stack>
                 </Stack>
 
