@@ -1,4 +1,4 @@
-import {Card, Typography, Stack, Button, Box} from "@mui/material";
+import {Card, Typography, Stack, Box} from "@mui/material";
 import TeamChip from "@/components/TeamChip"
 import AthleteChip from "@/components/AthleteChip"
 import React from "react";
