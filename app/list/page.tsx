@@ -1,7 +1,7 @@
+import {Box} from "@mui/material";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Box } from "@mui/material";
 import UserTable from "@/components/UserTable";
+import Footer from "@/components/Footer";
 
 export default function List() {
     return (
