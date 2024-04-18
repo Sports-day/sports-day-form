@@ -1,4 +1,3 @@
-'use client'
 import {Button, Stack, Typography, Paper, BottomNavigation} from "@mui/material";
 
 const Footer = () => {
