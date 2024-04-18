@@ -1,36 +1,57 @@
+'use client'
+import React, { useState, useEffect } from 'react';
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-
-import * as React from "react";
-import {User} from "@/src/models/UserModel";
-import {teamFactory} from "@/src/models/TeamModel";
-import {teamTagFactory} from "@/src/models/TeamTagModel";
+import { User } from "@/src/models/UserModel";
+import { teamFactory } from "@/src/models/TeamModel";
+import { teamTagFactory } from "@/src/models/TeamTagModel";
 
 export type UserDataProps = {
     user: User;
 }
 
-const UserData = async (props: UserDataProps) => {
-    const teamData = await teamFactory().index();
-    const teams = teamData.filter(team => props.user.teamIds.includes(team.id));
-    const names = teams.map(team => team.name);
+const UserData = ({ user }: UserDataProps) => {
+    const [teamInfo, setTeamInfo] = useState<{ teamName: string; tagName: string }[]>([]);
 
-    const teamTags = await teamTagFactory().index();
-    // Assuming team tags are mapped to teams by teamTagId
-    const teamTagsMapped = teams.map(team => {
-        const tag = teamTags.find(tag => tag.id === team.teamTagId);
-        return tag ? tag.name : 'No tag';
-    });
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const teamData = await teamFactory().index();
+                const filteredTeams = teamData.filter(team => user.teamIds.includes(team.id));
 
-    // Render component
+                const teamTags = await teamTagFactory().index();
+
+                let info = filteredTeams.map(team => ({
+                    teamName: team.name,
+                    tagName: (teamTags.find(tag => tag.id === team.teamTagId) || { name: 'No tag' }).name
+                }));
+
+                // タグ名に基づいてソート
+                info.sort((a, b) => {
+                    if (a.tagName.includes("晴天時") && !b.tagName.includes("晴天時")) return -1;
+                    if (!a.tagName.includes("晴天時") && b.tagName.includes("晴天時")) return 1;
+                    return 0;
+                });
+
+                setTeamInfo(info);
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+            }
+        };
+
+        fetchData();
+    }, [user.teamIds]);
+
     return (
         <TableRow>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}}>{props.user.id}</TableCell>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}} align="left">{props.user.name}</TableCell>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}} align="left">{teamTagsMapped[0] || 'No Tag'}</TableCell>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}} align="left">{names[0] || 'No Team'}</TableCell>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}} align="left">{teamTagsMapped[1] || 'No Tag'}</TableCell>
-            <TableCell sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}} align="left">{names[1] || 'No Team'}</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }}>{user.id}</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{user.name}</TableCell>
+            {teamInfo.map((info, index) => (
+                <React.Fragment key={index}>
+                    <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{info.tagName}</TableCell>
+                    <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{info.teamName}</TableCell>
+                </React.Fragment>
+            ))}
         </TableRow>
     );
 }
