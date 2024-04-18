@@ -33,7 +33,7 @@ export default function TeamDetail(props: TeamDetailProps) {
                     </Stack>
                     <Stack spacing={3}>
                         <Stack spacing={1}>
-                            <TeamChip classId={props.team.classId}/>
+                            <TeamChip classId={props.team.classId} teamId={props.team.id}/>
                             <AthleteChip/>
                         </Stack>
                         <DeleteTeam teamId={props.team.id}/>
