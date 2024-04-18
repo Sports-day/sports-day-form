@@ -57,34 +57,53 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             target: {value},
         } = event;
 
-        const personNames = typeof value === 'string' ? value.split(',') : value
+        const personNames = typeof value === 'string' ? value.split(',') : value;
 
-        //ここで保存前と保存後で消されたpersonを確認し、消えていたらpersonNameに上書きする
-        const whatIsDeleted = personName.filter((value) => !personNames.includes(value))
-        const whatIsAdded = personNames.filter((value) => !personName.includes(value))
+        const personIds = personNames
+            .map((personName) => members.find((member) => member.name === personName)?.id)
+            .filter((id): id is number => id !== undefined); // `id is number` という型ガードを使用
 
-        for (const userId of whatIsDeleted) {
-            await teamFactory().removeTeamUser(props.teamId, parseInt(userId))
+        // 削除するユーザーの処理
+        const whatIsDeleted = personName.filter((value) => !personNames.includes(value));
+
+        for (const name of whatIsDeleted) {
+            const user = members.find(member => member.name === name);
+            if (user) {
+                await teamFactory().removeTeamUser(props.teamId, user.id);
+            }
         }
 
-        await teamFactory().addTeamUsers(props.teamId, whatIsAdded.map(value1 => parseInt(value1)))
+        // 追加するユーザーの処理
+        const whatIsAdded = personNames.filter((value) => !personName.includes(value));
+        const addedIds = whatIsAdded
+            .map((name) => members.find(member => member.name === name)?.id)
+            .filter((id): id is number => id !== undefined); // ここでも同様の型ガードを使用
 
-        setPersonName(
-            personNames
-        );
+        if (addedIds.length > 0) {
+            await teamFactory().addTeamUsers(props.teamId, addedIds);
+        }
 
-        const persons = personNames
-            .map((person) => members.find((value) => value.name === person)?.id)
-            .filter((person) => person != undefined)
-
-            await teamFactory().addTeamUsers(props.teamId, persons)
-
-
+        setPersonName(personNames);
     };
 
-    const chipDelete = (name: string) => {
 
-        setPersonName(personName.filter(value => value !== name));
+    const chipDelete = async (name: string) => {
+        // 名前に関連付けられたユーザー ID を見つけます
+        const user = members.find(member => member.name === name);
+
+        if (user) {
+            try {
+                // サーバー上の情報を更新するために removeTeamUser を呼び出します
+                await teamFactory().removeTeamUser(props.teamId, user.id);
+
+                // UI の変更を反映するためにローカルステートを更新します
+                setPersonName(personName.filter(value => value !== name));
+            } catch (error) {
+                console.error('チームユーザーの削除に失敗しました:', error);
+            }
+        } else {
+            console.warn('その名前のユーザーが見つかりませんでした:', name);
+        }
     };
 
     return (
