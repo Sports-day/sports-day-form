@@ -43,6 +43,17 @@ declare module '@mui/material/AppBar' {
     }
 }
 
+declare module '@mui/material/Chip' {
+    interface SvgIconPropsColorOverrides {
+        "s-lightest": true;
+        "s-lighter": true;
+        "s-light": true;
+        "s-dark": true;
+        "s-darker": true;
+        "s-darkest": true;
+    }
+}
+
 export const theme = createTheme({
     palette: {
         "s-lightest": {
