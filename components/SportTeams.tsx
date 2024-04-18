@@ -39,8 +39,6 @@ export default function SportTeams(props: SportTeamsProps) {
                 <AddTeam tag={props.tag} />
                 <TeamList tag={props.tag} />
             </CardContent>
-
-
         </Card>
 
 );
