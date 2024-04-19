@@ -2,17 +2,22 @@ import { Box, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import { userinfoFactory } from "@/src/models/UserinfoModel";
+import ProfileCard from "@/components/ProfileCard";
 
 export default async function Userinfo() {
     const userinfo = await userinfoFactory().fetch()
 
     return (
-        <Box sx={{
-            pt: '70px', // AppBarの高さに合わせて調整
-            height: '100vh', // ビューポートの高さに合わせる
-            display: 'flex',
-            flexDirection: 'column'
-        }}>
+        <Box
+            padding={2}
+            sx={{
+                pt: '70px',
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
             <AppBar position="fixed"
                     sx={{
                         color: 's-lightest.main',
@@ -22,15 +27,26 @@ export default async function Userinfo() {
             />
             <Stack
                 spacing={1}
-                alignItems='center'
+                sx={{ width: '100%' }}
+                alignItems='stretch'
                 justifyContent='center'
-                sx={{ flexGrow: 1 }} // スタックが残りのスペースを埋めるようにする
             >
-                <Typography sx={{ textAlign: 'center' }}>
-                    中村 有機＿富山さん、
-                    あなたの情報を確認しましょう
+                <Typography
+                    variant="h6"
+                    color="s-darkest.main"
+                    fontWeight="bold"
+                    sx={{
+                        textAlign: 'center',
+                        width: '100%'
+                    }}
+                >
+                    中村 有機＿富山さん<br/>あなたの情報を確認しましょう
                 </Typography>
+
+                <ProfileCard/>
             </Stack>
         </Box>
+
+
     );
 }
