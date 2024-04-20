@@ -1,27 +1,23 @@
 'use client'
-import {createTheme} from "@mui/material";
-
-declare module '@mui/material/styles' {
-    interface BreakpointOverrides {
-        xs: false; // removes the `xs` breakpoint
-        sm: false;
-        md: false;
-        lg: false;
-        xl: false;
-        mobile: true; // adds the `mobile` breakpoint
-        tablet: true;
-        laptop: true;
-        desktop: true;
-    }
-}
+import {CardContent, createTheme} from "@mui/material";
+import {styled} from "@mui/system";
 
 export const theme = createTheme({
     breakpoints: {
         values: {
-            mobile: 0,
-            tablet: 640,
-            laptop: 1024,
-            desktop: 1200,
+            xs: 0,
+            sm: 790,
+            md: 1000,
+            lg: 1200,
+            xl: 1440
         },
     },
 });
+
+const CustomCardContent = styled(CardContent)`
+  &:last-child {
+  padding-bottom: 16px;
+ } 
+`
+
+export { CustomCardContent };

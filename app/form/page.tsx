@@ -1,21 +1,14 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SportList from "@/components/SportList";
 import {Box} from "@mui/material";
-
 
 export default function Form() {
     return (
-        <>
+        <Box sx={{ paddingTop: '50px', paddingBottom: '80px'}}>
             <Header />
-            <Box
-                color="s-darkest"
-                borderRadius="20px" // 角を丸める
-                boxShadow="0px 4px 6px rgba(0, 0, 0, 0.1)" // 影の設定
-                marginTop="80px" // 上部からのマージン
-                padding="20px"
-            >
-            </Box>
+            <SportList />
             <Footer/>
-        </>
+        </Box>
     );
 }
