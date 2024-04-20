@@ -1,5 +1,6 @@
 'use client'
-import {createTheme} from "@mui/material";
+import {CardContent, createTheme} from "@mui/material";
+import {styled} from "@mui/system";
 
 export const theme = createTheme({
     breakpoints: {
@@ -12,3 +13,11 @@ export const theme = createTheme({
         },
     },
 });
+
+const CustomCardContent = styled(CardContent)`
+  &:last-child {
+  padding-bottom: 16px;
+ } 
+`
+
+export { CustomCardContent };
