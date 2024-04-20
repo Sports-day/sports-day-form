@@ -21,6 +21,7 @@ const Footer = () => {
                     </Typography>
                     <Button
                         variant='contained'
+                        href={"/form"}
                         disableElevation={true}
                         sx={{
                             flex: '0.18',
@@ -33,6 +34,7 @@ const Footer = () => {
                     </Button>
                     <Button
                         variant='contained'
+                        href={"/list"}
                         disableElevation={true}
                         sx={{
                             flex: '0.18',
