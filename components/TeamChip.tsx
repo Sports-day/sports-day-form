@@ -48,6 +48,7 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
     useAsync(async () => {
         const memberData = await classFactory().getUsers(props.classId);
         setMembers(memberData);
+
         const teamMember = await teamFactory().getTeamUsers(props.teamId)
         setPersonName(teamMember.map((member) => member.name))
     }, [props.classId]);
@@ -58,10 +59,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
         } = event;
 
         const personNames = typeof value === 'string' ? value.split(',') : value;
-
-        const personIds = personNames
-            .map((personName) => members.find((member) => member.name === personName)?.id)
-            .filter((id): id is number => id !== undefined); // `id is number` という型ガードを使用
 
         // 削除するユーザーの処理
         const whatIsDeleted = personName.filter((value) => !personNames.includes(value));
@@ -152,7 +149,8 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
                     MenuProps={MenuProps}
                 >
                     {members.map((member) => (
-                        <MenuItem key={member.name} value={member.name} style={getStyles(member.name, personName, theme)}>
+                        <MenuItem key={member.name} value={member.name}
+                                  style={getStyles(member.name, personName, theme)}>
                             {member.name}
                         </MenuItem>
                     ))}

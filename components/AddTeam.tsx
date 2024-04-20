@@ -14,13 +14,11 @@ export type AddTeamProps = {
 export default function AddTeam(props: AddTeamProps) {
     const router = useRouter()
 
-    const onClickHandle = async () =>{
+    const onClickHandle = async () => {
         const userInfo = await userinfoFactory().fetch()
         const classInfo = await classFactory().show(userInfo.classId)
 
-        //generate 2 random characters
-
-
+        //  generate 2 random characters
         await teamFactory().create({
             name: `${classInfo.name}-${generateRandomString(2)}`,
             description: "",
@@ -30,16 +28,16 @@ export default function AddTeam(props: AddTeamProps) {
 
         router.refresh()
     }
-    return (
 
+    return (
         <Button onClick={onClickHandle}
-            variant="contained"
-            sx={{
-                color: "s-lightest.main",
-                backgroundColor: 's-lighter.main',
-                borderRadius: "9px",
-                marginTop: 2
-            }}
+                variant="contained"
+                sx={{
+                    color: "s-lightest.main",
+                    backgroundColor: 's-lighter.main',
+                    borderRadius: "9px",
+                    marginTop: 2
+                }}
         >
             チームを追加
         </Button>

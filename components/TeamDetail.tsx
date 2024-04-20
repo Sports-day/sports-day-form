@@ -1,9 +1,9 @@
 import {Card, Typography, Stack, Box} from "@mui/material";
 import TeamChip from "@/components/TeamChip"
-import AthleteChip from "@/components/AthleteChip"
 import React from "react";
 import {Team} from "@/src/models/TeamModel";
 import DeleteTeam from "@/components/DeleteTeam";
+import AthleteChip from "@/components/AthleteChip";
 
 export type TeamDetailProps = {
     team: Team
@@ -34,7 +34,7 @@ export default function TeamDetail(props: TeamDetailProps) {
                     <Stack spacing={3}>
                         <Stack spacing={1}>
                             <TeamChip classId={props.team.classId} teamId={props.team.id}/>
-                            <AthleteChip/>
+                            <AthleteChip team={props.team} />
                         </Stack>
                         <DeleteTeam teamId={props.team.id}/>
                     </Stack>
