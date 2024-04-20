@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,6 +7,7 @@ import {Stack} from "@mui/material";
 import {teamTagFactory} from "@/src/models/TeamTagModel";
 import {teamFactory} from "@/src/models/TeamModel";
 import {User} from "@/src/models/UserModel";
+import {CustomCardContent} from "@/components/theme";
 
 export type ProfileCardProps = {
     user: User
@@ -54,13 +56,18 @@ export default async function ProfileCard(props: ProfileCardProps) {
                         alignItems: 'flex-start',
                         color: 's-light.main',
                         background: `radial-gradient(ellipse at left, #5F6DC2, #3E4EB3)`,
-                        border: 0
+                        border: 0,
+                        paddingBottom: 0
                     }}
                 >
-                    <CardContent sx={{width: '100%'}}>
+                    <CustomCardContent sx={{ width: '100%' }}>
                         <Stack
                             direction='column'
                             spacing={1}
+                            sx={{
+                                width: '100%',
+                                height: '100%'
+                            }}
                         >
                             <Card variant="outlined"
 
@@ -123,7 +130,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                 </CardContent>
                             </Card>
                         </Stack>
-                    </CardContent>
+                    </CustomCardContent>
                 </Card>
             ))}
         </>
