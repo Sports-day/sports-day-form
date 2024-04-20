@@ -21,10 +21,10 @@ export default async function UserTable() {
                     <TableRow>
                         <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }}>学籍番号</TableCell>
                         <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',  }} align="left">名前</TableCell>
-                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">競技(1)</TableCell>
-                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">チーム(1)</TableCell>
-                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">競技(2)</TableCell>
-                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">チーム(2)</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">晴天時の競技</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">晴天時のチーム</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">雨天時の競技</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', backgroundColor: '#E5E7F3',   }} align="left">雨天時のチーム</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
