@@ -44,7 +44,7 @@ export default async function  Userinfo() {
                                 width: '100%'
                             }}
                         >
-                            {userInfo.name}さん
+                            {userInfo.name ?? "unknown"} さん
                         </Typography>
                         <Typography variant="h5"
                                     color="s-darker.main"
