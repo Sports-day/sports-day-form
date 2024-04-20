@@ -1,59 +1,95 @@
-'use client'
-import React, { useState, useEffect } from 'react';
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import { User } from "@/src/models/UserModel";
-import { teamFactory } from "@/src/models/TeamModel";
-import { teamTagFactory } from "@/src/models/TeamTagModel";
+import {User} from "@/src/models/UserModel";
+import {teamFactory} from "@/src/models/TeamModel";
+import {teamTagFactory} from "@/src/models/TeamTagModel";
+import {Fragment} from "react";
 
 export type UserDataProps = {
     user: User;
 }
 
-const UserData = ({ user }: UserDataProps) => {
-    const [teamInfo, setTeamInfo] = useState<{ teamName: string; tagName: string }[]>([]);
+type TeamInfo = {
+    teamName: string;
+    tagName: string;
+}
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const teamData = await teamFactory().index();
-                const filteredTeams = teamData.filter(team => user.teamIds.includes(team.id));
+export default async function UserData(props: UserDataProps) {
+    const teamData = await teamFactory().index();
+    const teamTags = await teamTagFactory().index();
 
-                const teamTags = await teamTagFactory().index();
+    const filteredTeams = teamData.filter(team => props.user.teamIds.includes(team.id));
 
-                let info = filteredTeams.map(team => ({
-                    teamName: team.name,
-                    tagName: (teamTags.find(tag => tag.id === team.teamTagId) || { name: 'No tag' }).name
-                }));
+    const teamInfoList: TeamInfo[] = filteredTeams.map(team => {
+        return {
+            teamName: team.name,
+            tagName: (teamTags.find(tag => tag.id === team.teamTagId) || {name: 'No tag'}).name
+        }
+    })
 
-                // タグ名に基づいてソート
-                info.sort((a, b) => {
-                    if (a.tagName.includes("晴天時") && !b.tagName.includes("晴天時")) return -1;
-                    if (!a.tagName.includes("晴天時") && b.tagName.includes("晴天時")) return 1;
-                    return 0;
-                });
+    // タグ名に基づいてソート
+    teamInfoList.sort((a, b) => {
+        if (a.tagName.includes("晴天時") && !b.tagName.includes("晴天時")) return -1;
+        if (!a.tagName.includes("晴天時") && b.tagName.includes("晴天時")) return 1;
+        return 0;
+    })
 
-                setTeamInfo(info);
-            } catch (error) {
-                console.error("Failed to fetch data:", error);
-            }
-        };
 
-        fetchData();
-    }, [user.teamIds]);
+    const teamInfoComponents = teamInfoList.map((info, index) => (
+        <Fragment key={index}>
+            <TableCell
+                sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}}
+                align="left"
+            >
+                {info.tagName}
+            </TableCell>
+            <TableCell
+                sx={{fontWeight: 'bold', color: '#2F3C8C', border: 0}}
+                align="left"
+            >
+                {info.teamName}
+            </TableCell>
+        </Fragment>
+    ));
+
+    const alertOutOfRange = (
+        <Fragment>
+            <TableCell
+                sx={{fontWeight: 'bold', color: 'red', border: 0}}
+                align="left"
+            >
+                ３つ以上のチームに所属しています。<br/>
+                {teamInfoList.map((info, index) => (
+                    <Fragment key={index}>
+                        {info.tagName} チーム{info.teamName}<br/>
+                    </Fragment>
+                ))}
+            </TableCell>
+        </Fragment>
+    );
 
     return (
         <TableRow>
-            <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }}>{user.id}</TableCell>
-            <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{user.name}</TableCell>
-            {teamInfo.map((info, index) => (
-                <React.Fragment key={index}>
-                    <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{info.tagName}</TableCell>
-                    <TableCell sx={{ fontWeight: 'bold', color: '#2F3C8C', border: 0 }} align="left">{info.teamName}</TableCell>
-                </React.Fragment>
-            ))}
+            <TableCell
+                sx={{
+                    fontWeight: 'bold',
+                    color: '#2F3C8C',
+                    border: 0
+                }}
+            >
+                {props.user.id}
+            </TableCell>
+            <TableCell
+                sx={{
+                    fontWeight: 'bold',
+                    color: '#2F3C8C',
+                    border: 0
+                }}
+                align="left"
+            >
+                {props.user.name}
+            </TableCell>
+            {teamInfoComponents.length > 2 ? alertOutOfRange : teamInfoComponents}
         </TableRow>
     );
 }
-
-export default UserData;

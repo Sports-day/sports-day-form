@@ -11,7 +11,6 @@ import {userinfoFactory} from "@/src/models/UserinfoModel";
 import {classFactory} from "@/src/models/ClassModel";
 
 export default async function UserTable() {
-
     const userInfo = await userinfoFactory().fetch()
     const classMembers = await classFactory().getUsers(userInfo.classId)
 
@@ -34,7 +33,6 @@ export default async function UserTable() {
                             <UserData user={member} key={member.id}/>
                         )
                     })}
-
                 </TableBody>
             </Table>
         </TableContainer>
