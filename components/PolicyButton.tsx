@@ -5,6 +5,7 @@ export function PolicyButton() {
     return (
         <Button
             variant="contained"
+            disableElevation
             sx={{
                 color: "s-lightest.main",
                 backgroundColor: 's-lighter.main',

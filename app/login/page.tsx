@@ -1,6 +1,7 @@
 import {Box, Stack, Typography} from "@mui/material";
 import LoginButton from "@/components/auth/LoginButton";
 import {PolicyButton} from "@/components/PolicyButton";
+import Image from "next/image";
 
 export default function Login() {
     return (
@@ -13,10 +14,9 @@ export default function Login() {
                 <Stack
                     justifyContent="center"
                     alignItems="center"
+                    spacing={1}
                 >
-                    <Typography variant="h4" >
-                        SPORTSDAY
-                    </Typography>
+                    <Image src={"/logo/logo_form.png"} height={"24"} width={"302"} alt={"SPORTSDAY Form"}/>
                     <Typography
                         variant="subtitle2"
                     >
