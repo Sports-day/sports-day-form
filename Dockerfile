@@ -18,9 +18,6 @@ COPY --from=Builder /app/node_modules/ ./node_modules/
 COPY app/ ./app/
 COPY components/ ./components/
 COPY src/ ./src/
-COPY public/ ./public/
-COPY styles/ ./styles/
-COPY types/ ./types/
 COPY tsconfig.json .
 COPY next.config.mjs .
 COPY middleware.ts .
