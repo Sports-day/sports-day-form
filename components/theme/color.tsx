@@ -55,6 +55,13 @@ declare module '@mui/material/Chip' {
 }
 
 export const theme = createTheme({
+    components: {
+        MuiButtonBase: {
+            defaultProps: {
+                disableRipple: true,
+            },
+        },
+    },
     palette: {
         "s-lightest": {
             main: '#FFFFFF'
@@ -77,7 +84,12 @@ export const theme = createTheme({
         },
         background: {
             default: '#EFF0F8',
-        }
+        },
+        primary: {
+            main: '#7f8cd6',
+            dark: '#7f8cd6',
+            light: '#7f8cd6',
+        },
     },
 });
 
