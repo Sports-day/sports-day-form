@@ -8,6 +8,8 @@ import {teamTagFactory} from "@/src/models/TeamTagModel";
 import {teamFactory} from "@/src/models/TeamModel";
 import {User} from "@/src/models/UserModel";
 import {CustomCardContent} from "@/components/theme";
+import SDlogo from "@/public/logo/logo.svg";
+
 
 export type ProfileCardProps = {
     user: User
@@ -69,6 +71,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                 height: '100%'
                             }}
                         >
+                            <SDlogo width={135} height={16} fill={'#9aa6e5'}/>
                             <Card variant="outlined"
 
                                   sx={{

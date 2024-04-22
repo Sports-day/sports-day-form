@@ -1,6 +1,9 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import {IconButton, Tooltip} from "@mui/material";
+import {HiArrowRightOnRectangle} from "react-icons/hi2";
+import LogoutButton from "@/components/auth/LogoutButton";
 
 const Header = () => {
     return (
@@ -14,9 +17,8 @@ const Header = () => {
                 }}
                 >
             <Toolbar>
-                <Typography variant="h6" component="div" >
-                    SPORTSDAY
-                </Typography>
+                <Image src={"/logo/logo_form.png"} height={"20"} width={"252"} alt={"SPORTSDAY Admin"}/>
+                <LogoutButton/>
             </Toolbar>
         </AppBar>
     );
