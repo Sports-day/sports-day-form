@@ -1,11 +1,12 @@
 import * as React from "react";
-import {Alert, Box, Stack} from "@mui/material";
+import {Alert, Box, Button, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import { userinfoFactory } from "@/src/models/UserinfoModel";
 import ProfileCard from "@/components/ProfileCard";
 import { WarningRounded } from "@mui/icons-material";
 import LogoutButton from "@/components/auth/LogoutButton";
+import WiderLogo from "@/public/logo/widerlogotype.svg";
 
 export default async function Userinfo() {
     const userInfo = await userinfoFactory().fetch();
@@ -107,7 +108,15 @@ export default async function Userinfo() {
                                     </Box>
                                 </Alert>
                             )}
-                            <LogoutButton/>
+                            <Stack direction={"row"}>
+                                <LogoutButton/>
+                                <Button>
+                                    <Stack direction={"row"} spacing={0.5}>
+                                        <Typography fontWeight={"600"} color={"#99a5d6"}>(C)2024</Typography>
+                                        <WiderLogo width={80*1.5} height={13*1.5} fill={'#9aa6e5'}/>
+                                    </Stack>
+                                </Button>
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Stack>
