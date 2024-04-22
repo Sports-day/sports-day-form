@@ -124,7 +124,8 @@ export function PolicyButton() {
                     color: "s-lightest.main",
                     backgroundColor: 's-lighter.main',
                     borderRadius: "9px",
-                    py: 1.5
+                    py: 1.5,
+                    width:"100%"
                 }}
                 >
                 プライバシーポリシー

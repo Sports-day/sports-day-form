@@ -32,7 +32,7 @@ export default async function Userinfo() {
                     alignItems='stretch'
                     justifyContent='center'
                 >
-                    <Stack spacing={5} sx={{ position: 'relative' }}>
+                    <Stack spacing={3} sx={{ position: 'relative' }}>
                         <Stack spacing={1}>
                             <Typography
                                 variant="h5"
@@ -56,13 +56,12 @@ export default async function Userinfo() {
                             </Typography>
                         </Stack>
                         {!showTeamError && userInfo && <ProfileCard user={userInfo} />}
-                        <Stack spacing={2}>
+                        <Stack spacing={2} alignItems={"center"}>
                             <Alert
                                 variant="outlined"
                                 icon={false}
                                 sx={{
                                     width: '100%',
-                                    maxWidth: '400px',
                                     fontWeight: 'bold',
                                     color: '#A22E1D',
                                     borderRadius: '9px',
@@ -90,7 +89,6 @@ export default async function Userinfo() {
                                     icon={false}
                                     sx={{
                                         width: '100%',
-                                        maxWidth: '400px',
                                         fontWeight: 'bold',
                                         color: '#A22E1D',
                                         borderRadius: '9px',

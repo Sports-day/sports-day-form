@@ -1,8 +1,5 @@
 'use client'
-import {Button, IconButton, Tooltip} from "@mui/material";
-import crypto from 'crypto';
-import * as querystring from "querystring";
-import {useEffect, useState} from "react";
+import {IconButton, Tooltip} from "@mui/material";
 import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
 import {HiArrowRightOnRectangle} from "react-icons/hi2";
@@ -19,6 +16,7 @@ export default function LogoutButton() {
                     //  redirect with next
                     router.push("/login")
                 }}
+                sx={{width:"fit-content"}}
             >
                 <HiArrowRightOnRectangle color={"#7f8cd6"}/>
             </IconButton>

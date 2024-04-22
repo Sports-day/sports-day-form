@@ -1,8 +1,6 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Image from 'next/image';
-import {IconButton, Tooltip} from "@mui/material";
-import {HiArrowRightOnRectangle} from "react-icons/hi2";
 import LogoutButton from "@/components/auth/LogoutButton";
 
 const Header = () => {

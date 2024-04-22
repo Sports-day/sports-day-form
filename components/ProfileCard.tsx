@@ -81,7 +81,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                       display: 'flex',
                                       alignItems: 'flex-start',
                                       color: 's-light.main',
-                                      background: `radial-gradient(ellipse at left, #6F7DCC, #5F6DC2)`,
+                                      background: `rgba(255, 255, 255, 0.1)`,
                                   }}>
                                 <CardContent sx={{width: '100%', height: '100%'}}>
                                     <Stack
@@ -109,7 +109,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                     display: 'flex',
                                     alignItems: 'flex-start',
                                     color: 's-light.main',
-                                    background: `radial-gradient(ellipse at left, #7F8CD6, #5F6DC2)`,
+                                    background: `rgba(255, 255, 255, 0.1)`,
                                     border: 0
                                 }}
                             >
