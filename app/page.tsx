@@ -28,7 +28,6 @@ export default async function Userinfo() {
             >
 
                 <Stack
-                    spacing={4}
                     sx={{ width: '100%' }}
                     alignItems='stretch'
                     justifyContent='center'
@@ -57,7 +56,8 @@ export default async function Userinfo() {
                             </Typography>
                         </Stack>
                         {!showTeamError && userInfo && <ProfileCard user={userInfo} />}
-                        <Stack spacing={2} alignItems={"center"}>
+
+                        <Stack spacing={2} alignItems='center'>
                             <Alert
                                 variant="outlined"
                                 icon={false}
