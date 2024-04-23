@@ -32,9 +32,6 @@ export default function SportTeams(props: SportTeamsProps) {
                         {props.tag.name}
                     </Typography>
 
-                    <Typography variant="subtitle1" color="s-darkest.main" fontWeight="bold">
-                        {props.tag.name}
-                    </Typography>
                 </Stack>
                 <AddTeam tag={props.tag} />
                 <TeamList tag={props.tag} />
