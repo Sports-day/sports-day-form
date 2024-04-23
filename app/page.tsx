@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Alert, Box, Button, Stack} from "@mui/material";
+import {Alert, Box, Button, IconButton, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import { userinfoFactory } from "@/src/models/UserinfoModel";
@@ -7,6 +7,9 @@ import ProfileCard from "@/components/ProfileCard";
 import { WarningRounded } from "@mui/icons-material";
 import LogoutButton from "@/components/auth/LogoutButton";
 import WiderLogo from "@/public/logo/widerlogotype.svg";
+import Link from "next/link";
+import {HiArrowRightOnRectangle} from "react-icons/hi2";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export default async function Userinfo() {
     const userInfo = await userinfoFactory().fetch();
@@ -110,6 +113,13 @@ export default async function Userinfo() {
                             )}
                             <Stack direction={"row"}>
                                 <LogoutButton/>
+                                <IconButton
+                                    component={Link}
+                                    href={"https://github.com/Sports-day/sports-day-form"}
+                                    sx={{width:"fit-content"}}
+                                >
+                                    <GitHubIcon color={"primary"}/>
+                                </IconButton>
                                 <Button>
                                     <Stack direction={"row"} spacing={0.5}>
                                         <Typography fontWeight={"600"} color={"#99a5d6"}>(C)2024</Typography>
