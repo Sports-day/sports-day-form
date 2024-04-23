@@ -38,6 +38,7 @@ export default function LoginButton() {
         <Button
             variant="contained"
             href={authorizationUrl}
+            disableElevation
             sx={{
                 color: 's-dark.main',
                 backgroundColor: 's-light.main',

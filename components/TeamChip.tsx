@@ -31,10 +31,10 @@ const MenuProps = {
     },
 };
 
-function getStyles(member: string, personName: readonly string[], theme: Theme) {
+function getStyles(id: number, selectedIds: readonly number[], theme: Theme) {
     return {
         fontWeight:
-            personName.indexOf(member) === -1
+            selectedIds.indexOf(id) === -1
                 ? theme.typography.fontWeightRegular
                 : theme.typography.fontWeightMedium,
     };
@@ -42,7 +42,7 @@ function getStyles(member: string, personName: readonly string[], theme: Theme) 
 
 export default function MultipleSelectChip(props: TeamMemberProps) {
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState<string[]>([]);
+    const [selectedIds, setSelectedIds] = React.useState<number[]>([]);
     const [members, setMembers] = React.useState<User[]>([]);
 
     useAsync(async () => {
@@ -50,43 +50,54 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
         setMembers(memberData);
 
         const teamMember = await teamFactory().getTeamUsers(props.teamId)
-        setPersonName(teamMember.map((member) => member.name))
+        setSelectedIds(teamMember.map((member) => member.id))
     }, [props.classId]);
 
-    const handleChange = async (event: SelectChangeEvent<typeof personName>) => {
+    const handleChange = async (event: SelectChangeEvent<typeof selectedIds>) => {
         const {
             target: {value},
         } = event;
 
-        const personNames = typeof value === 'string' ? value.split(',') : value;
+        const formattedSelectedIds = typeof value === 'string' ? value.split(',') : value;
+        const currentSelectedIds = formattedSelectedIds.map((id) => {
+            if (typeof id === 'string') {
+                console.log("parsed value")
+                return parseInt(id)
+            }
+            return id
+        });
 
         // 削除するユーザーの処理
-        const whatIsDeleted = personName.filter((value) => !personNames.includes(value));
+        const whatIsDeleted = selectedIds.filter((value) => !currentSelectedIds.includes(value));
 
-        for (const name of whatIsDeleted) {
-            const user = members.find(member => member.name === name);
+        for (const id of whatIsDeleted) {
+            const user = members.find(member => member.id === id)
             if (user) {
                 await teamFactory().removeTeamUser(props.teamId, user.id);
             }
         }
 
         // 追加するユーザーの処理
-        const whatIsAdded = personNames.filter((value) => !personName.includes(value));
+        const whatIsAdded = currentSelectedIds.filter((value) => !selectedIds.includes(value));
         const addedIds = whatIsAdded
-            .map((name) => members.find(member => member.name === name)?.id)
-            .filter((id): id is number => id !== undefined); // ここでも同様の型ガードを使用
+            .filter((id) => members.find(member => member.id === id) !== undefined)
 
         if (addedIds.length > 0) {
             await teamFactory().addTeamUsers(props.teamId, addedIds);
         }
 
-        setPersonName(personNames);
+        setSelectedIds(currentSelectedIds);
     };
 
 
-    const chipDelete = async (name: string) => {
+    const chipDelete = async (id: number | undefined) => {
+        if (!id) {
+            console.log('error: id is undefined')
+            return
+        }
+
         // 名前に関連付けられたユーザー ID を見つけます
-        const user = members.find(member => member.name === name);
+        const user = members.find(member => member.id === id)
 
         if (user) {
             try {
@@ -94,12 +105,10 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
                 await teamFactory().removeTeamUser(props.teamId, user.id);
 
                 // UI の変更を反映するためにローカルステートを更新します
-                setPersonName(personName.filter(value => value !== name));
+                setSelectedIds(selectedIds.filter(value => value !== id));
             } catch (error) {
                 console.error('チームユーザーの削除に失敗しました:', error);
             }
-        } else {
-            console.warn('その名前のユーザーが見つかりませんでした:', name);
         }
     };
 
@@ -118,39 +127,45 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
                     }}
                     multiple
                     displayEmpty
-                    value={personName}
+                    value={selectedIds}
                     onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-chip" label="メンバーを登録してください"/>}
                     renderValue={(selected) => (
                         <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 1.0}}>
-                            {selected.map((value) => (
-                                <Chip key={value} label={value}
-                                      sx={{
-                                          color: 's-light.main',
-                                          backgroundColor: 's-lighter.main',
-                                          '& .MuiChip-deleteIcon': {
-                                              color: 's-light.main', // 通常時の色
-                                              '&:hover': {
-                                                  color: 's-light.main' // ホバー時も同じ色にする
+                            {selected.map((value) => {
+                                const user = members.find(member => member.id === value);
+                                return (
+                                    <Chip key={value} label={user?.name}
+                                          sx={{
+                                              color: 's-light.main',
+                                              backgroundColor: 's-lighter.main',
+                                              '& .MuiChip-deleteIcon': {
+                                                  color: 's-light.main', // 通常時の色
+                                                  '&:hover': {
+                                                      color: 's-light.main' // ホバー時も同じ色にする
+                                                  }
                                               }
-                                          }
-                                      }}
-                                      deleteIcon={<CancelIcon/>}
-                                      onDelete={() => {
-                                          chipDelete(value)
-                                      }}
-                                      onMouseDown={(event) => {
-                                          event.stopPropagation()
-                                      }}
-                                />
-                            ))}
+                                          }}
+                                          deleteIcon={<CancelIcon/>}
+                                          onDelete={async () => {
+                                              await chipDelete(user?.id)
+                                          }}
+                                          onMouseDown={(event) => {
+                                              event.stopPropagation()
+                                          }}
+                                    />
+                                )
+                            })}
                         </Box>
                     )}
                     MenuProps={MenuProps}
                 >
                     {members.map((member) => (
-                        <MenuItem key={member.name} value={member.name}
-                                  style={getStyles(member.name, personName, theme)}>
+                        <MenuItem
+                            key={member.id}
+                            value={member.id}
+                            style={getStyles(member.id, selectedIds, theme)}
+                        >
                             {member.name}
                         </MenuItem>
                     ))}

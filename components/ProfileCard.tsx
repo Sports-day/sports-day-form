@@ -8,6 +8,8 @@ import {teamTagFactory} from "@/src/models/TeamTagModel";
 import {teamFactory} from "@/src/models/TeamModel";
 import {User} from "@/src/models/UserModel";
 import {CustomCardContent} from "@/components/theme";
+import SDlogo from "@/public/logo/logo.svg";
+
 
 export type ProfileCardProps = {
     user: User
@@ -69,6 +71,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                 height: '100%'
                             }}
                         >
+                            <SDlogo width={135} height={16} fill={'#9aa6e5'}/>
                             <Card variant="outlined"
 
                                   sx={{
@@ -78,7 +81,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                       display: 'flex',
                                       alignItems: 'flex-start',
                                       color: 's-light.main',
-                                      background: `radial-gradient(ellipse at left, #6F7DCC, #5F6DC2)`,
+                                      background: `rgba(255, 255, 255, 0.1)`,
                                   }}>
                                 <CardContent sx={{width: '100%', height: '100%'}}>
                                     <Stack
@@ -106,7 +109,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                     display: 'flex',
                                     alignItems: 'flex-start',
                                     color: 's-light.main',
-                                    background: `radial-gradient(ellipse at left, #7F8CD6, #5F6DC2)`,
+                                    background: `rgba(255, 255, 255, 0.1)`,
                                     border: 0
                                 }}
                             >
