@@ -33,7 +33,7 @@ export default function SportTeams(props: SportTeamsProps) {
                     </Typography>
 
                     <Typography variant="subtitle1" color="s-darkest.main" fontWeight="bold">
-                        {props.tag.name}についての説明(チームを構成するにあたって必要な情報、人数や最大チーム数、競技方式など)
+                        {props.tag.name}
                     </Typography>
                 </Stack>
                 <AddTeam tag={props.tag} />
