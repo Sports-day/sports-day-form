@@ -23,7 +23,6 @@ export function BackButton() {
                 href={"/form"}
                 disableElevation={true}
                 sx={{
-                    flex: '0.18',
                     py: 1.0,
                     borderRadius: "10px",
                     backgroundColor: 's-lighter.main',

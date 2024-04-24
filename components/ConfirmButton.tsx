@@ -23,7 +23,6 @@ export function ConfirmButton() {
                 href="/list"
                 disableElevation={true}
                 sx={{
-                    flex: '0.18',
                     py: 1.0,
                     backgroundColor: 's-light.main',
                     borderRadius: "10px",
