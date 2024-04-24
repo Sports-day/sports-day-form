@@ -20,7 +20,7 @@ const Footer = () => {
                            width: '100%'
                        }}>
                     <Typography variant='subtitle1' component='div'>
-                        チーム登録フロー：晴天時のチーム登録→雨天時のチーム登録→登録漏れの確認→完了
+                        チーム登録フロー：晴天時・雨天時のチーム登録→登録漏れの確認→完了
                     </Typography>
                     <BackButton />
                     <ConfirmButton />
