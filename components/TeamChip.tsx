@@ -26,7 +26,6 @@ const MenuProps = {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
             width: 250,
-            color: 's-dark.main'
         },
     },
 };
@@ -67,7 +66,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             return id
         });
 
-        // 削除するユーザーの処理
         const whatIsDeleted = selectedIds.filter((value) => !currentSelectedIds.includes(value));
 
         for (const id of whatIsDeleted) {
@@ -77,7 +75,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             }
         }
 
-        // 追加するユーザーの処理
         const whatIsAdded = currentSelectedIds.filter((value) => !selectedIds.includes(value));
         const addedIds = whatIsAdded
             .filter((id) => members.find(member => member.id === id) !== undefined)
@@ -96,7 +93,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             return
         }
 
-        // 名前に関連付けられたユーザー ID を見つけます
         const user = members.find(member => member.id === id)
 
         if (user) {
@@ -111,6 +107,12 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             }
         }
     };
+
+    const getStyles = (id: number, selectedIds: readonly number[], theme: Theme) => ({
+        fontWeight: selectedIds.indexOf(id) !== -1 ? 'bold' : 'normal',
+        color: selectedIds.indexOf(id) !== -1 ? '#3E4EB3' : undefined,
+        backgroundColor: selectedIds.indexOf(id) !== -1 ? '#EEEEEE' : undefined,
+    });
 
     return (
         <div>
@@ -140,9 +142,9 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
                                               color: 's-light.main',
                                               backgroundColor: 's-lighter.main',
                                               '& .MuiChip-deleteIcon': {
-                                                  color: 's-light.main', // 通常時の色
+                                                  color: 's-light.main',
                                                   '&:hover': {
-                                                      color: 's-light.main' // ホバー時も同じ色にする
+                                                      color: 's-light.main'
                                                   }
                                               }
                                           }}
