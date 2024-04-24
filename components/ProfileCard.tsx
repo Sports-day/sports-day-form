@@ -50,7 +50,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                     variant="outlined"
                     sx={{
                         width: '100%',
-                        maxWidth: '100%',
+                        maxWidth: "800px",
                         margin: '8px 0',
                         boxShadow: 0,
                         borderRadius: '9px',
@@ -120,7 +120,7 @@ export default async function ProfileCard(props: ProfileCardProps) {
                                         sx={{width: '100%', height: '100%'}}
                                     >
                                         <Typography variant="subtitle2">
-                                            あなたと同じチームの人一覧
+                                            あなたと同じチームの人
                                         </Typography>
                                         <Stack direction="column">
                                             {team.teamMembers.map((member, index) => (
