@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Alert, Box, Button, IconButton, Stack} from "@mui/material";
+import {Alert, Box, Button, IconButton, Stack, Tooltip} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { userinfoFactory } from "@/src/models/UserinfoModel";
 import ProfileCard from "@/components/ProfileCard";
@@ -114,15 +114,17 @@ export default async function Userinfo() {
                                     </Box>
                                 </Alert>
                             )}
-                            <Stack direction={"row"}>
+                            <Stack direction={"row"} spacing={1}>
                                 <LogoutButton/>
-                                <IconButton
-                                    component={Link}
-                                    href={"https://github.com/Sports-day/sports-day-form"}
-                                    sx={{width:"fit-content"}}
-                                >
-                                    <GitHubIcon color={"primary"}/>
-                                </IconButton>
+                                <Tooltip title={"GitHub"}>
+                                    <IconButton
+                                        component={Link}
+                                        href={"https://github.com/Sports-day/sports-day-form"}
+                                        sx={{width:"fit-content"}}
+                                    >
+                                        <GitHubIcon color={"primary"}/>
+                                    </IconButton>
+                                </Tooltip>
                                 <Button>
                                     <Stack direction={"row"} spacing={0.5}>
                                         <Typography fontWeight={"600"} color={"#99a5d6"}>(C)2024</Typography>
