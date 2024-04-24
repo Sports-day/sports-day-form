@@ -8,6 +8,7 @@ import LogoutButton from "@/components/auth/LogoutButton";
 import WiderLogo from "@/public/logo/widerlogotype.svg";
 import Link from "next/link";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import AutoPageRefresh from "@/components/autoPageRefresh";
 
 export default async function Userinfo() {
     const userInfo = await userinfoFactory().fetch();
@@ -16,6 +17,7 @@ export default async function Userinfo() {
 
     return (
         <>
+            <AutoPageRefresh />
             <Box
                 padding={2}
                 sx={{
