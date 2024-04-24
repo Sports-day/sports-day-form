@@ -26,19 +26,19 @@ const MenuProps = {
         style: {
             maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
             width: 250,
-            color: 's-dark.main'
         },
     },
 };
 
-function getStyles(id: number, selectedIds: readonly number[], theme: Theme) {
+const getStyles = (id: number, selectedIds: readonly number[], theme: Theme) => {
+    const isSelected = selectedIds.indexOf(id) !== -1;
     return {
-        fontWeight:
-            selectedIds.indexOf(id) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
+        fontWeight: isSelected ? 'bold' : theme.typography.fontWeightRegular,
+        color: isSelected ? '#3E4EB3' : undefined,
+        backgroundColor: isSelected ? '#EEEEEE' : undefined,
     };
-}
+};
+
 
 export default function MultipleSelectChip(props: TeamMemberProps) {
     const theme = useTheme();
@@ -67,7 +67,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             return id
         });
 
-        // 削除するユーザーの処理
         const whatIsDeleted = selectedIds.filter((value) => !currentSelectedIds.includes(value));
 
         for (const id of whatIsDeleted) {
@@ -77,7 +76,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             }
         }
 
-        // 追加するユーザーの処理
         const whatIsAdded = currentSelectedIds.filter((value) => !selectedIds.includes(value));
         const addedIds = whatIsAdded
             .filter((id) => members.find(member => member.id === id) !== undefined)
@@ -96,7 +94,6 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             return
         }
 
-        // 名前に関連付けられたユーザー ID を見つけます
         const user = members.find(member => member.id === id)
 
         if (user) {
@@ -111,6 +108,8 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
             }
         }
     };
+
+
 
     return (
         <div>
@@ -140,9 +139,9 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
                                               color: 's-light.main',
                                               backgroundColor: 's-lighter.main',
                                               '& .MuiChip-deleteIcon': {
-                                                  color: 's-light.main', // 通常時の色
+                                                  color: 's-light.main',
                                                   '&:hover': {
-                                                      color: 's-light.main' // ホバー時も同じ色にする
+                                                      color: 's-light.main'
                                                   }
                                               }
                                           }}
