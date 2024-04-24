@@ -1,37 +1,28 @@
 'use client'
-import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
+import {usePathname} from "next/navigation";
 
 export function BackButton() {
-    const [currentPage, setCurrentPage] = useState(window.location.pathname);
-    const isListPage = currentPage === '/form';
-
-    useEffect(() => {
-        const handleLocationChange = () => {
-            setCurrentPage(window.location.pathname);
-        };
-        window.addEventListener('popstate', handleLocationChange);
-        return () => {
-            window.removeEventListener('popstate', handleLocationChange);
-        };
-    }, []);
+    const pathname = usePathname()
 
     return (
         <>
-            <Button
-                variant='contained'
-                href={"/form"}
-                disableElevation={true}
-                sx={{
-                    py: 1.0,
-                    borderRadius: "10px",
-                    backgroundColor: 's-lighter.main',
-                    color: 's-lightest.main',
-                    textAlign: 'center'
-                }}
-                style={{ display: isListPage ? 'none' : 'block' }}>
-                戻る
-            </Button>
+            {pathname.startsWith("/list") &&
+                <Button
+                    variant='contained'
+                    href={"/form"}
+                    disableElevation={true}
+                    sx={{
+                        py: 1.0,
+                        borderRadius: "10px",
+                        backgroundColor: 's-lighter.main',
+                        color: 's-lightest.main',
+                        textAlign: 'center'
+                    }}
+                >
+                    戻る
+                </Button>
+            }
         </>
     );
 }
