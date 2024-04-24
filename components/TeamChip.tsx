@@ -30,15 +30,14 @@ const MenuProps = {
     },
 };
 
-const getStyles = (id: number, selectedIds: readonly number[], theme: Theme) => {
+function getStyles (id: number, selectedIds: readonly number[], theme: Theme) {
     const isSelected = selectedIds.indexOf(id) !== -1;
     return {
         fontWeight: isSelected ? 'bold' : theme.typography.fontWeightRegular,
         color: isSelected ? '#3E4EB3' : undefined,
         backgroundColor: isSelected ? '#EEEEEE' : undefined,
     };
-};
-
+}
 
 export default function MultipleSelectChip(props: TeamMemberProps) {
     const theme = useTheme();
