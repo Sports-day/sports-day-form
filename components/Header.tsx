@@ -15,7 +15,7 @@ const Header = () => {
                 }}
                 >
             <Toolbar>
-                <Image src={"/logo/logo_form.png"} height={"20"} width={"252"} alt={"SPORTSDAY Admin"}/>
+                <Image src={"/logo/logo_form.png"} height={"20"} width={"236"} alt={"SPORTSDAY Admin"}/>
                 <LogoutButton/>
             </Toolbar>
         </AppBar>
