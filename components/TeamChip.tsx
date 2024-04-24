@@ -30,14 +30,15 @@ const MenuProps = {
     },
 };
 
-function getStyles(id: number, selectedIds: readonly number[], theme: Theme) {
+const getStyles = (id: number, selectedIds: readonly number[], theme: Theme) => {
+    const isSelected = selectedIds.indexOf(id) !== -1;
     return {
-        fontWeight:
-            selectedIds.indexOf(id) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
+        fontWeight: isSelected ? 'bold' : theme.typography.fontWeightRegular,
+        color: isSelected ? '#3E4EB3' : undefined,
+        backgroundColor: isSelected ? '#EEEEEE' : undefined,
     };
-}
+};
+
 
 export default function MultipleSelectChip(props: TeamMemberProps) {
     const theme = useTheme();
@@ -108,11 +109,7 @@ export default function MultipleSelectChip(props: TeamMemberProps) {
         }
     };
 
-    const getStyles = (id: number, selectedIds: readonly number[], theme: Theme) => ({
-        fontWeight: selectedIds.indexOf(id) !== -1 ? 'bold' : 'normal',
-        color: selectedIds.indexOf(id) !== -1 ? '#3E4EB3' : undefined,
-        backgroundColor: selectedIds.indexOf(id) !== -1 ? '#EEEEEE' : undefined,
-    });
+
 
     return (
         <div>
