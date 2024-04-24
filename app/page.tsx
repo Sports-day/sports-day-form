@@ -31,7 +31,7 @@ export default async function Userinfo() {
             >
                 <Stack
                     sx={{ width: '100%', maxWidth: '800px' }}
-                    alignItems='stretch'
+                    alignItems='center'
                     justifyContent='center'
                     spacing={3}
                 >
