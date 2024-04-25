@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Alert, Box, Button, IconButton, Stack, Tooltip } from "@mui/material";
+import { Alert, Box, Button, IconButton, Stack,Snackbar, Tooltip } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { userinfoFactory } from "@/src/models/UserinfoModel";
 import ProfileCard from "@/components/ProfileCard";
@@ -9,6 +9,7 @@ import WiderLogo from "@/public/logo/widerlogotype.svg";
 import Link from "next/link";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AutoPageRefresh from "@/components/autoPageRefresh";
+import {HiArrowTopRightOnSquare} from "react-icons/hi2";
 
 export default async function Userinfo() {
     const userInfo = await userinfoFactory().fetch();
@@ -18,6 +19,45 @@ export default async function Userinfo() {
     return (
         <>
             <AutoPageRefresh />
+            <Button
+                component={Link}
+                target="_blank"
+                href={"https://forms.office.com/r/Wy06kvy1ew"}
+            >
+                <Snackbar
+                    color={"#9aa6e5"}
+                    open={true}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    sx={{
+                        width: '100%',
+                        height: '70px',
+                        justifyContent: 'center'
+
+                    }}
+                >
+                    <Alert
+                        variant="outlined"
+                        icon={false}
+                        sx={{
+                            fontWeight: 'bold',
+                            color: '#eff0f8',
+                            borderRadius: '9px',
+                            backgroundColor: '#4a5abb',
+                            borderColor: '#7f8cd6',
+                            py: 1.5
+                        }}
+                    >
+                        <Box display="flex" alignItems="center">
+                            <Box sx={{ paddingLeft: '8px', display: 'flex', alignItems: 'center' }}>
+                                <HiArrowTopRightOnSquare fontSize="medium" />
+                                <Typography variant="subtitle2" sx={{ lineHeight: 1, mx:2 }}>
+                                    SPORTSDAY Formについての感想を教えてください！
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Alert>
+                </Snackbar>
+            </Button>
             <Box
                 padding={2}
                 sx={{
@@ -67,6 +107,31 @@ export default async function Userinfo() {
                     </Typography>
 
                     {!showTeamError && userInfo && <ProfileCard user={userInfo} />}
+
+                    <Alert
+                        variant="outlined"
+                        icon={false}
+                        sx={{
+                            width: '100%',
+                            maxWidth: "800px",
+                            fontWeight: 'bold',
+                            color: '#eff0f8',
+                            borderRadius: '9px',
+                            backgroundColor: '#5f6dc2',
+                            borderColor: '#7f8cd6',
+                            py: 1.5,
+                            display: showTeamError ? 'none' : 'block',
+                        }}
+                    >
+                        <Box display="flex" alignItems="center">
+                            <WarningRounded fontSize="medium" />
+                            <Box sx={{ paddingLeft: '8px', display: 'flex', alignItems: 'center' }}>
+                                <Typography variant="subtitle2" sx={{ lineHeight: 1 }}>
+                                    間違っていたら体育委員に必ず知らせてください！
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Alert>
 
                     {showTeamError && (
                         <Alert
