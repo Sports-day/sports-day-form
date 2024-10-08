@@ -2,6 +2,7 @@
 # sports-day-form
 
 チーム申請といったアナログな作業をDXすることで、作業の最適化及びヒューマンエラーを最大限減らすことを目的とするアプリケーション
+![form](https://github.com/user-attachments/assets/8df566d9-4610-427c-9967-368add160bde)
 
 ## Develop
 
